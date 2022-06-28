@@ -2,4 +2,4 @@
 
 Phonebook single page app:
 
-https://agile-temple-23952.herokuapp.com/
+https://marty-phonebook.herokuapp.com/
