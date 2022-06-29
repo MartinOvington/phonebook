@@ -26,11 +26,6 @@ jobs:
         run: |
           cd frontend
           npm run lint
-      - name: build frontend and move folder to backend
-        run: |
-          cd frontend
-          npm run build
-          mv build ../backend/.
       - name: npm install backend
         run: |
           cd backend
