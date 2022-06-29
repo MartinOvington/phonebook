@@ -47,8 +47,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: marty-phonebook
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: 'https://marty-phonebook.herokuapp.com/health'
-          rollbackonhealthcheckfailed: true
+          #healthcheck: 'https://marty-phonebook.herokuapp.com/health'
+          #rollbackonhealthcheckfailed: true
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
