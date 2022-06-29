@@ -1,6 +1,5 @@
 backend/node_modules/
 backend/requests/
-backend/build
 backend/requests/
 backend/.env
 frontend/node_modules/
