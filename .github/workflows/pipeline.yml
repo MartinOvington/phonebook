@@ -25,9 +25,9 @@ jobs:
       - name: build frontend
         run: npm run build
       - name: move build
-        run: mv build ../.
-      - name: cd top-level
-        run: cd ..
+        run: mv build ../backend/.
+      - name: cd backend
+        run: cd ../backend
       - name: npm install
         run: npm install
       - name: lint
@@ -39,7 +39,7 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: marty-pokedex
+          heroku_app_name: marty-phonebook
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: 'https://marty-pokedex.herokuapp.com/health'
           rollbackonhealthcheckfailed: true
