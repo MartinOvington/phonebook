@@ -22,6 +22,8 @@ jobs:
         run: ls -a
       - name: cd frontend
         run: cd frontend
+      - name: list dir frontend
+        run: ls -a
       - name: lint frontend
         run: npm run lint
       - name: build frontend
