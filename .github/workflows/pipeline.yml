@@ -18,6 +18,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
+      - name: npm install frontend
+        run: |
+          cd frontend
+          npm install
       - name: lint frontend
         run: |
           cd frontend
