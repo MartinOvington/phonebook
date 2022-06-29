@@ -18,7 +18,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: buid frontend
+      - name: list dir
+        run: ls -a
+      - name: cd frontend
         run: cd frontend
       - name: lint frontend
         run: npm run lint
