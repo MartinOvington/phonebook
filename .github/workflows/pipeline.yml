@@ -26,6 +26,10 @@ jobs:
         run: |
           cd frontend
           npm run lint
+      - name: check build folder exists
+        run: |
+          cd backend
+          cd build
       - name: npm install backend
         run: |
           cd backend
