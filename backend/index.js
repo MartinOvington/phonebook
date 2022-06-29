@@ -39,6 +39,10 @@ app.get('/api/persons', (request, response, next) => {
     .catch((error) => next(error));
 });
 
+app.get('/health', (req, res) => {
+  res.send('ok');
+});
+
 app.get('/api/persons/:id', (request, response, next) => {
   Person.findById(request.params.id)
     .then((person) => {

@@ -31,14 +31,14 @@ jobs:
           cd frontend
           npm run build
           mv build ../backend/.
-      - name: cd backend
-        run: cd ../backend
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: npm run build
-        run: npm run build
+      - name: npm install backend
+        run: |
+          cd backend
+          npm install
+      - name: lint backend
+        run: |
+          cd backend
+          npm run eslint
       - name: deploy to heroku
         if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.12
@@ -46,7 +46,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: marty-phonebook
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: 'https://marty-pokedex.herokuapp.com/health'
+          healthcheck: 'https://marty-phonebook.herokuapp.com/health'
           rollbackonhealthcheckfailed: true
   tag_release:
     needs: [simple_deployment_pipeline]
