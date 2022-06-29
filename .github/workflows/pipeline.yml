@@ -38,6 +38,7 @@ jobs:
       - name: lint backend
         run: |
           cd backend
+          ls -a
           npm run lint
       - name: deploy to heroku
         if: ${{ github.event_name == 'push' }}
