@@ -80,14 +80,16 @@ jobs:
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') && success() }}
         with:
           severity: info
-          details: Build Succeeded!
+          text: Deployment succeeded
+          description: Commit ID
+          details: ${{ github.events.commits[0].id }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') && failure() }}
         with:
           severity: error
-          username: DeploymentStatusChecker
-          text: ${{ github.events.commits[0].id }}
+          text: Deployment failed
           description: Commit ID
+          details: ${{ github.events.commits[0].id }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
