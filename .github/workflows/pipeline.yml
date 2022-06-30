@@ -81,7 +81,7 @@ jobs:
         with:
           severity: info
           text: Deployment succeeded
-          description: To ${{github.event.repository.name}} by ${{github.event.repository_owner}}
+          description: To ${{github.event.repository.name}} by ${{github.repository_owner}}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Test Failure
