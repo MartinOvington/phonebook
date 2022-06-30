@@ -83,7 +83,7 @@ jobs:
         with:
           severity: info
           text: A new version of Phonebook was deployed
-          description: to ${{github.repositoryUrl}} by ${{github.repository_owner}}
+          description: to ${{github.repositoryUrl}} by ${{github.events.head_commit.author}}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Test Failure
@@ -93,5 +93,5 @@ jobs:
           severity: error
           text: Deployment failed
           description: Commit URL
-          details: ${{github.events.head_commit[url]}} by ${{github.events.head_commit[author]}}
+          details: ${{github.events.head_commit.url}} by ${{github.events.head_commit.author}}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
