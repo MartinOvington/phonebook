@@ -38,6 +38,10 @@ jobs:
         run: |
           cd backend
           npm run lint
+      - name: start build
+        run: |
+          cd backend
+          npm start
       - name: test e2e
         run: |
           cd backend
