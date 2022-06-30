@@ -42,6 +42,9 @@ jobs:
         run: |
           cd backend
           npm start
+        env:
+          MONGODB_URI: ${{secrets.MONGODB_URI}}
+
       - name: test e2e
         run: |
           cd backend
