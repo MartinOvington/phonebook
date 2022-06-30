@@ -44,7 +44,7 @@ jobs:
           npm start
         env:
           MONGODB_URI: ${{secrets.MONGODB_URI}}
-
+          PORT: ${{secrets.PORT}}
       - name: test e2e
         run: |
           cd backend
