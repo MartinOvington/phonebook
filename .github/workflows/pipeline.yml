@@ -80,8 +80,8 @@ jobs:
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') && success() }}
         with:
           severity: info
-          text: Deployment succeeded
-          description: To ${{github.event.repository.name}} by ${{github.repository_owner}}
+          text: A new version of Phonebook was deployed
+          description: to ${{github.event.repository.name}} by ${{github.repository_owner}}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Test Failure
