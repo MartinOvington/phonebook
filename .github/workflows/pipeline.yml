@@ -38,17 +38,16 @@ jobs:
         run: |
           cd backend
           npm run lint
-      - name: start build
-        run: |
-          cd backend
-          npm start
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm start
+          wait-on: http://localhost:3001
+          working-directory: backend
         env:
           MONGODB_URI: ${{secrets.MONGODB_URI}}
           PORT: ${{secrets.PORT}}
-      - name: test e2e
-        run: |
-          cd backend
-          npm run test:e2e
       - name: deploy to heroku
         if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.12
