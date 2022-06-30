@@ -81,9 +81,12 @@ jobs:
         with:
           severity: info
           text: Deployment succeeded
-          description: Commit ID
-          details: ${{ github.events.commits[0].id }}
+          description: To $repo_name by $owner
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        env:
+          repo_name: ${{github.event.repository.name}}
+          owner: ${{github.event.repository_owner}}
+
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') && failure() }}
