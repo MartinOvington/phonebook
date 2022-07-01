@@ -58,6 +58,24 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: 'https://marty-phonebook.herokuapp.com/health'
           rollbackonhealthcheckfailed: true
+      - name: Test Success
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') && success() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          text: A new version of Phonebook was deployed
+          description: to https://marty-phonebook.herokuapp.com/ by ${{github.events.head_commit.author}}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Failure
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') && failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          text: Deployment failed
+          description: Commit URL
+          details: ${{github.events.head_commit.url}} by ${{github.events.head_commit.author}}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -71,27 +89,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-  notification:
-    if: always()
-    needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - name: Test Success
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') && success() }}
-        uses: rjstone/discord-webhook-notify@v1
-        with:
-          severity: info
-          text: A new version of Phonebook was deployed
-          description: to ${{github.repositoryUrl}} by ${{github.events.head_commit.author}}
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-
-      - name: Test Failure
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') && failure() }}
-        uses: rjstone/discord-webhook-notify@v1
-        with:
-          severity: error
-          text: Deployment failed
-          description: Commit URL
-          details: ${{github.events.head_commit.url}} by ${{github.events.head_commit.author}}
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
