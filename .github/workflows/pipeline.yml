@@ -18,26 +18,26 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: lint frontend
-        run: |
-          cd frontend
-          npm run lint
       - name: npm install frontend
         run: |
           cd frontend
           npm install
+      - name: lint frontend
+        run: |
+          cd frontend
+          npm run lint
       - name: check build folder exists
         run: |
           cd backend
           cd build
-      - name: lint backend
-        run: |
-          cd backend
-          npm run lint
       - name: npm install backend
         run: |
           cd backend
           npm install
+      - name: lint backend
+        run: |
+          cd backend
+          npm run lint
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
