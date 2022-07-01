@@ -73,7 +73,7 @@ jobs:
           severity: error
           text: Deployment failed
           description: Commit URL
-          details: ${{github.events.head_commit.url}} by ${{github.events.head_commit.author}}
+          details: ${{github.events.head_commit[url]}} by ${{github.events.head_commit[author]}}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
